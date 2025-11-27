@@ -1,96 +1,150 @@
-<!DOCTYPE html>
+import { Analytics } from "@vercel/analytics/next"<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script defer src="/_vercel/insights/script.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css"
-    />
-    <title>Vercel HTML Starter</title>
-    <meta
-      name="description"
-      content="High-performance HTML based website template."
-    />
-  </head>
-  <body>
-    <h1>Vercel HTML Starter</h1>
-    <p>
-      This template is a simple, but powerful single
-      <code>index.html</code> file deployed to
-      <a href="https://vercel.com">Vercel</a>. When your site is deployed, all
-      static assets (like HTML, JavaScript, CSS, images, and more) are deployed
-      globally to every
-      <a href="https://vercel.com/docs/concepts/edge-network/overview"
-        >Vercel Edge Network</a
-      >
-      region.
-    </p>
-    <h2>Simple, privacy-friendly analytics</h2>
-    <p>
-      Want to understand your visitor traffic? Vercel Analytics gives you
-      first-party, privacy-friendly traffic analytics for your HTML site. This
-      template is already configured using the following script:
-    </p>
-    <pre><code>&lt;script defer src="/_vercel/insights/script.js"&gt;&lt;/script&gt;</code></pre>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/analytics">Vercel Analytics</a>.
-    </p>
-    <h2>Integrated with git</h2>
-    <p>
-      Deploying updates to your site is as simple as
-      <code>git push</code> thanks to Vercel's advanced
-      <a href="https://vercel.com/docs/concepts/git">Git Integration</a>.
-      Support for GitHub, GitLab, Bitbucket is zero-configuration, and with the
-      flexible Vercel CLI and API, you can integrate with any tool possible.
-    </p>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/git">Git Integration</a>.
-    </p>
-    <h2>Fast <code>gzip</code> compression</h2>
-    <p>
-      To help ensure the smallest possible file sizes for your static assets,
-      the Vercel Edge Network compresses files by default using
-      <code>gzip</code>. You can also optionally use
-      <code>brotli</code> compressesion if you prefer.
-    </p>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/edge-network/compression"
-        >compression</a
-      >.
-    </p>
-    <h2>Advanced routing configuration</h2>
-    <p>
-      Vercel gives you a variety of ways to configure the routing of your
-      website. For example, adding redirects, rewrites, or headers to your page.
-      While you can use <code>vercel.json</code> to define these through JSON,
-      you can also express your routing configuration as code using
-      <a href="https://vercel.com/docs/concepts/functions/edge-middleware"
-        >Vercel Edge Middleware</a
-      >.
-    </p>
-    <p>
-      Middleware runs before the
-      <a href="https://vercel.com/docs/concepts/edge-network/caching"
-        >Vercel Edge Network Cache</a
-      >, so you can configure routing exactly as your application needs. For
-      example, this template uses <code>middleware.js</code> defined in the root
-      of the repository to add additional security headers to the site:
-    </p>
-    <pre><code>referrer-policy: origin-when-cross-origin
-strict-transport-security: max-age=31536000; includeSubDomains; preload
-x-content-type-options: nosniff
-x-dns-prefetch-control: on
-x-frame-options: DENY</code></pre>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/functions/edge-middleware"
-        >Vercel Edge Middleware</a
-      >.
-    </p>
-  </body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Game Portal</title>
+
+<style>
+  body {
+    margin: 0;
+    background: #0d0d0d;
+    color: white;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+  }
+
+  .container {
+    text-align: center;
+    width: 90%;
+    max-width: 900px;
+    animation: fadeIn 0.9s ease;
+  }
+
+  h1 {
+    font-size: 36px;
+    margin-bottom: 15px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    margin-top: 25px;
+  }
+
+  .card {
+    background: #1b1b1b;
+    padding: 20px;
+    border-radius: 12px;
+    transition: 0.3s;
+    cursor: pointer;
+    border: 1px solid #222;
+  }
+
+  .card:hover {
+    transform: scale(1.05);
+    background: #222;
+  }
+
+  .card img {
+    width: 100%;
+    border-radius: 8px;
+  }
+
+  .btn {
+    margin-top: 25px;
+    padding: 12px 25px;
+    background: #007BFF;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .btn:hover {
+    background: #005ae1;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Choose Your Game</h1>
+  <p>New users get a new random game every time. Played games won't repeat until you've tried all!</p>
+
+  <div class="grid">
+    <div class="card" onclick="goTo('devil.html')">
+      <img src="https://via.placeholder.com/200x120/550000/ffffff?text=Devil+Game">
+      <p>Devil Game</p>
+    </div>
+
+    <div class="card" onclick="goTo('flips.html')">
+      <img src="https://via.placeholder.com/200x120/005555/ffffff?text=Flips+Game">
+      <p>Flips</p>
+    </div>
+
+    <div class="card" onclick="goTo('dinosaur.html')">
+      <img src="https://via.placeholder.com/200x120/225500/ffffff?text=Dinosaur">
+      <p>Dinosaur Run</p>
+    </div>
+
+    <div class="card" onclick="goTo('magic.html')">
+      <img src="https://via.placeholder.com/200x120/330055/ffffff?text=Magic+Game">
+      <p>Magic Moves</p>
+    </div>
+  </div>
+
+  <button class="btn" onclick="randomGame()">🎲 Surprise Me</button>
+</div>
+
+
+<script>
+// AVAILABLE GAMES
+const games = ["devil.html", "flips.html", "dinosaur.html", "magic.html"];
+
+// Get played list or create empty array
+let played = JSON.parse(localStorage.getItem("played_games")) || [];
+
+// Redirect function
+function goTo(game) {
+  if (!played.includes(game)) played.push(game);
+  localStorage.setItem("played_games", JSON.stringify(played));
+  window.location.href = game;
+}
+
+// Smart Random Game
+function randomGame() {
+  let remaining = games.filter(g => !played.includes(g));
+
+  // If all games are played -> reset
+  if (remaining.length === 0) {
+    played = [];
+    localStorage.setItem("played_games", JSON.stringify([]));
+    remaining = [...games];
+  }
+
+  // Pick a random game
+  const selected = remaining[Math.floor(Math.random() * remaining.length)];
+  goTo(selected);
+}
+
+// Automatic redirect for new users (after 3 sec)
+setTimeout(() => {
+  randomGame();
+}, 3000);
+
+</script>
+
+</body>
 </html>
